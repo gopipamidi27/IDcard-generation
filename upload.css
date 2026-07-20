@@ -1,0 +1,137 @@
+        *{
+            margin: 0;
+            border: 0;
+        }
+        body{
+            height: auto !important;
+            min-height: 100vh !important;
+            overflow: visible !important;
+        }
+        #print {
+        position: fixed;
+        top: 80px;
+        left: 600px;
+        height: 30px;
+        width: 90px;
+        background-color: rgb(245, 200, 77);
+        border: 1px solid rgb(245, 200, 77);
+        border-radius: 10px;
+        display: none;
+      }
+      #print:hover {
+        background-color: white;
+      }
+      #upbutton{
+        height: 30px;
+        width: 110px;
+        background-color: rgb(245, 200, 77);
+        border: 1px solid rgb(245, 200, 77);
+        border-radius: 10px;
+      }
+      #upbutton:hover {
+        background-color: white;
+      }
+      .idtemplate {
+        position: relative;
+        display: inline-block;
+        margin: 15px;
+        width: 375px;
+        height: 225px;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      .idtemplate h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: black;
+        color: white;
+        border-bottom: 1px solid black;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+       .bgimage {
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        height: 98%;
+        opacity: 0.2;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .idtemplate .empdata {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 10px;
+        height: 170px;
+      }
+      .qrcontainer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+      }
+      .textgroup {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1;
+      }
+      .idtemplate .empdata .empdatacolumn {
+        display: flex;
+        height: 30px;
+        width: auto;
+        gap: 5px;
+      }
+      .empid,
+      .empname,
+      .department,
+      .empdesignation {
+        font-weight: bold;
+        font-size: 18px;
+        font-family: "Times New Roman", Times, serif;
+        padding-left: 5px;
+      }
+
+      .idtemplate .empdata .qr {
+        border: 1px solid black;
+        height: 100px;
+        width: 110px;
+        margin: 10px;
+        padding: 5px;
+      }
+     @media print {
+        @page{
+            margin: 0;
+        }
+        body * {
+           
+            visibility: hidden;
+        }
+        .idtemplate,
+        .idtemplate * {
+          visibility: visible;
+        }
+        .maintemplate {
+          position: relative !important;
+          display: block !important;
+          height: auto !important;
+          max-height: none !important;
+          overflow: visible !important;
+          padding-top: 15px !important;
+          padding-left: 25px !important;
+          margin: 0 !important;
+          box-shadow: none;
+        }
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
