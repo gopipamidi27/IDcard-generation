@@ -1,15 +1,9 @@
 const fileinput = document.getElementById('upfile');
-            const id = document.getElementById("empid");
-            const name = document.getElementById("empname");
-            const desig = document.getElementById("empdesignation");
-            const dept = document.getElementById("department");
             const template = document.getElementById("idtemplate");
             const qrcont = document.getElementById("qr");
             const printbt = document.getElementById("print");
             const maintemp = document.getElementById("maintemplate");
             function generateids(){
-                maintemp.innerHTML = "";
-                //  template.style.display = "block";
                 printbt.style.display = "block";
                 if(fileinput.files.length === 0){
                     console.log("upload file first");
@@ -21,12 +15,12 @@ const fileinput = document.getElementById('upfile');
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data,{type:'array'});
                     const firstsheet = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const worksheet = workbook.Sheets[firstsheet];
                     const jsonarray = XLSX.utils.sheet_to_json(worksheet);
                     jsonarray.forEach(element => {
                         const cardtemp = document.createElement("div");
                         cardtemp.className = "idtemplate";
-                        cardtemp.id = "idtemplate";
+                        cardtemp.id = `idtemplate-${element.ID}`;
                         const qrdata = `${element.ID}-${element.Name}-${element.Department}`;
                         const cardcont =`<h2>Company ID card- Boutiqaat</h2>
                                          <div class="empdata">
@@ -37,22 +31,22 @@ const fileinput = document.getElementById('upfile');
                                          <label class="empname">${element.Name}</label>
                                          </div>
                                          <div class="empdatacolumn">
-                                         <lable>Employee ID </lable>
+                                         <label>Employee ID </label>
                                          <label class="empid">${element.ID}</label>
                                          </div>
                                          <div class="empdatacolumn">
-                                         <lable>Designation </lable>
+                                         <label>Designation </label>
                                          <label class="empdesignation">${element.Designation}</label>
                                          </div>
                                          <div class="empdatacolumn">
                                          <label>Department </label>
-                                         <lable class="department">${element.Department}</lable>
+                                         <label class="department">${element.Department}</label>
                                          </div>
                                          </div>
                                          <div class="qrcontainer">
                                            <div class="qr" id="qr-${element.ID}"></div>
-                                         </div> `
-                        
+                                         </div>
+                                         </div> `;
                         cardtemp.insertAdjacentHTML("beforeend",cardcont);
                         maintemp.appendChild(cardtemp);
                         const qrelement = document.getElementById(`qr-${element.ID}`);
@@ -65,15 +59,11 @@ const fileinput = document.getElementById('upfile');
                                     correctLevel: QRCode.CorrectLevel.H,
                                     });
                 });
-                }
-                reader.readAsArrayBuffer(file);
-                console.log(file.name);
-                
-            }
-window.onafterprint = function(){
-    if(maintemp)
-        maintemp.innerHTML = "";
-    if(fileinput)
+            };
+                reader.readAsArrayBuffer(file);  
+        }
+ function reset(){
+        maintemp.style.display = "none";
+        printbt.style.display = "none";
         fileinput.value = "";
-    printbt.style.display = "none";
-}
+      }

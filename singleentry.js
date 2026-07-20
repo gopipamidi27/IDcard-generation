@@ -24,9 +24,11 @@ const empdetails = document.querySelectorAll(".empdetails input");
           correctLevel: QRCode.CorrectLevel.H,
         });
       }
-      empdetails.forEach((ele) => {
-        ele.addEventListener("focus", () => {
-          template.style.display = "none";
-          printbt.style.display = "none";
+      function reset(){
+        template.style.display = "none";
+        printbt.style.display = "none";
+        empdetails.forEach((ele)=>{
+          ele.value = "";
         });
-      });
+      }
+      
